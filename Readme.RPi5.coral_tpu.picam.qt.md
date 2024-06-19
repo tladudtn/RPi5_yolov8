@@ -82,11 +82,6 @@ and recompile libcamera which is required by picamera2. I managed to compile lib
 At the end, I decided to force-ignore dependency of tflite-runtime==2.13.0 and then install tflite-runtime==2.14.0. I was going to give up on picamera2+pycoral combination if this did not work but it worked.
 Good enough for me now ;)
 
-### Export model to edge tpu
-
-```
-yolo export model=yolov8n.pt format=edgetpu imgsz=192,192
-```
 
 Note, the resoultion is forced to 192x192 since it was the only resolution that worked. Any higher resolution failed to run on the M.2 accelerator(https://coral.ai/products/m2-accelerator-bm).
 It seems like other people got to the same point (https://github.com/ultralytics/ultralytics/issues/4089)
@@ -95,4 +90,13 @@ It seems like other people got to the same point (https://github.com/ultralytics
 ```
 export PYTHONUTF8=1 
 python main_picam_coral_tpu.py
+
+
+
+```
+
+## Err : Failed to load delegate from libedgetpu.so.1
+```bash
+# Re pluged Coral tpu 
+sudo usermod -a -G plugdev $USER
 ```
